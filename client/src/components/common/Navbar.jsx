@@ -58,20 +58,32 @@ const Navbar = () => {
                     </div>
                   </div>
                   <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                    <button
-                      type="button"
-                      className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                    >
-                      <span className="absolute -inset-1.5" />
-                      <span className="sr-only">View notifications</span>
-                      <ShoppingCartIcon
-                        className="h-6 w-6"
-                        aria-hidden="true"
-                      />
-                    </button>
-                    <span className="inline-flex items-center rounded-full bg-red-500 mb-7 -ml-4 z-10 px-2 py-1 text-xs font-medium text-white ring-1 ring-inset ring-red-600/10">
-                      3
-                    </span>
+                    <Link to="/signin">
+                      <button
+                        type="button"
+                        className="relative rounded-full bg-lime-500 p-1 text-white hover:bg-lime-600 mx-2 w-24 font-bold"
+                      >
+                        Sign In
+                      </button>
+                    </Link>
+                    <Link to="/cart">
+                      <button
+                        type="button"
+                        className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                      >
+                        <span className="absolute -inset-1.5" />
+                        <span className="sr-only">View notifications</span>
+                        <ShoppingCartIcon
+                          className="h-6 w-6"
+                          aria-hidden="true"
+                        />
+                      </button>
+                    </Link>
+                    <Link className="z-10" to="/cart">
+                      <span className="inline-flex items-center rounded-full bg-red-500 hover:bg-red-700 mb-7 -ml-4  px-2 py-1 text-xs font-medium text-white ring-1 ring-inset ring-red-600/10">
+                        3
+                      </span>
+                    </Link>
 
                     {/* Profile dropdown */}
                     <Menu as="div" className="relative ml-3">
