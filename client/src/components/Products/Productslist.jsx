@@ -1,11 +1,11 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 const Productslist = () => {
   const products = [
     {
       id: 1,
       name: "Basic Tee",
-      href: "#",
+      href: "/productdetails",
       imageSrc:
         "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
       imageAlt: "Front of men's Basic Tee in black.",
@@ -56,7 +56,7 @@ const Productslist = () => {
 
   return (
     <>
-      <div className="w-full mt-4">
+      <div>
         <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
           <h2 className="text-2xl font-bold tracking-tight text-gray-900">
             Latest trends
@@ -75,10 +75,10 @@ const Productslist = () => {
                 <div className="mt-4 flex justify-between">
                   <div>
                     <h3 className="text-sm text-gray-700">
-                      <a href={product.href}>
+                      <Link to={product.href}>
                         <span aria-hidden="true" className="absolute inset-0" />
                         {product.name}
-                      </a>
+                      </Link>
                     </h3>
                     <p className="mt-1 text-sm text-gray-500">
                       {product.color}

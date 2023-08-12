@@ -1,6 +1,7 @@
 import React from "react";
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { Link } from "react-router-dom";
 import {
   Bars3Icon,
   ShoppingCartIcon,
@@ -42,14 +43,18 @@ const Navbar = () => {
                   </div>
                   <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                     <div className="flex flex-shrink-0 items-center">
-                      <img
-                        className="h-8 w-auto"
-                        src={shopicon}
-                        alt="ShopTrend"
-                      />
-                      <p className="text-xl text-white font-semibold mx-2">
-                        ShopTrend
-                      </p>
+                      <Link to="/">
+                        <img
+                          className="h-8 w-auto"
+                          src={shopicon}
+                          alt="ShopTrend"
+                        />
+                      </Link>
+                      <Link to="/">
+                        <p className="text-xl text-white font-semibold mx-2">
+                          ShopTrend
+                        </p>
+                      </Link>
                     </div>
                   </div>
                   <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
@@ -64,6 +69,9 @@ const Navbar = () => {
                         aria-hidden="true"
                       />
                     </button>
+                    <span className="inline-flex items-center rounded-full bg-red-500 mb-7 -ml-4 z-10 px-2 py-1 text-xs font-medium text-white ring-1 ring-inset ring-red-600/10">
+                      3
+                    </span>
 
                     {/* Profile dropdown */}
                     <Menu as="div" className="relative ml-3">
