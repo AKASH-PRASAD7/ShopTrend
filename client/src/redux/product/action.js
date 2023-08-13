@@ -58,7 +58,7 @@ export const getProductDetails = (id) => async (dispatch) => {
   }
 };
 
-export const getFilterProducts = (sort) => async (dispatch) => {
+export const getFilterProducts = (filter) => async (dispatch) => {
   try {
     dispatch({
       type: LOADING,
@@ -67,13 +67,14 @@ export const getFilterProducts = (sort) => async (dispatch) => {
 
     //fetch from graphql api
 
-    // const response = await fetch(
-    //   `https://dummyjson.com/products/category/${filter[0]}`
-    // );
-    // if (!response.ok) {
-    //   throw new Error("Failed to filter products");
-    // }
-    // const data = await response.json();
+    const response = await fetch(
+      `https://dummyjson.com/products/category/${filter[0]}`
+    );
+    if (!response.ok) {
+      throw new Error("Failed to filter products");
+    }
+    const data = await response.json();
+
     return dispatch({
       type: GET_FILTER_PRODUCTS,
       payload: data.products,
@@ -86,20 +87,20 @@ export const getFilterProducts = (sort) => async (dispatch) => {
   }
 };
 
-export const getSortedProducts = (filter) => async (dispatch) => {
+export const getSortedProducts = (sort) => async (dispatch) => {
   try {
     dispatch({
       type: LOADING,
       payload: true,
     });
-
-    const response = await fetch(
-      `https://dummyjson.com/products/category/${filter[0]}`
-    );
-    if (!response.ok) {
-      throw new Error("Failed to filter products");
-    }
-    const data = await response.json();
+    //fetch from graphql api
+    // const response = await fetch(
+    //   `https://dummyjson.com/products/category/${sort}`
+    // );
+    // if (!response.ok) {
+    //   throw new Error("Failed to filter products");
+    // }
+    // const data = await response.json();
     return dispatch({
       type: GET_SORTED_PRODUCTS,
       payload: data.products,

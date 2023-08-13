@@ -1,12 +1,25 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import shopicon from "../../assets/images/shop-icon.png";
+import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { signIn } from "../../redux/auth/action";
 const Signin = () => {
+  const dispatch = useDispatch();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => {
+    dispatch(signIn(data));
+  };
+
   return (
     <>
       <section>
-        <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-          <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+        <div className="flex min-h-full flex-1  flex-col justify-center px-6 py-12 lg:px-8">
+          <div className="sm:mx-auto sm:w-full bg-gray-300 p-4 sm:max-w-sm">
             <img
               className="mx-auto h-10 w-auto"
               src={shopicon}
@@ -17,8 +30,12 @@ const Signin = () => {
             </h2>
           </div>
 
-          <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form className="space-y-6" action="#" method="POST">
+          <div className=" sm:mx-auto sm:w-full bg-gray-300 p-4 sm:max-w-sm">
+            <form
+              noValidate
+              onSubmit={handleSubmit(onSubmit)}
+              className="space-y-6"
+            >
               <div>
                 <label
                   htmlFor="email"
@@ -30,11 +47,22 @@ const Signin = () => {
                   <input
                     id="email"
                     name="email"
+                    placeholder="John@gmail.com"
                     type="email"
                     autoComplete="email"
+                    {...register("email", {
+                      required: "email is required",
+                      pattern: {
+                        value: /\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi,
+                        message: "email not valid",
+                      },
+                    })}
                     required
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-lime-600 sm:text-sm sm:leading-6"
                   />
+                  {errors.email && (
+                    <p className="text-red-500">{errors.email.message}</p>
+                  )}
                 </div>
               </div>
 
@@ -51,11 +79,18 @@ const Signin = () => {
                   <input
                     id="password"
                     name="password"
+                    placeholder="password"
                     type="password"
                     autoComplete="current-password"
                     required
+                    {...register("password", {
+                      required: "password is required",
+                    })}
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-lime-600 sm:text-sm sm:leading-6"
                   />
+                  {errors.password && (
+                    <p className="text-red-500">{errors.password.message}</p>
+                  )}
                 </div>
               </div>
 

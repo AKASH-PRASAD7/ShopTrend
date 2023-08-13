@@ -1,6 +1,6 @@
 import React from "react";
 
-const Rating = ({ value }) => {
+const Rating = ({ value, size }) => {
   const maxStars = 5;
   return (
     <>
@@ -12,7 +12,9 @@ const Rating = ({ value }) => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className={`w-4 h-4 text-yellow-500 ${
+            className={`${
+              size === "large" ? `w-12 h-12` : `w-4 h-4`
+            }  text-yellow-500 ${
               index < value ? "fill-current" : "stroke-current"
             }`}
           >

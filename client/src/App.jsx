@@ -7,6 +7,7 @@ import ErrorPage from "./pages/ErrorPage";
 import Cart from "./pages/Cart";
 import SignIn from "./pages/SignIn";
 import Register from "./pages/Register";
+import Protected from "./components/common/Protected";
 function App() {
   return (
     <>
@@ -20,8 +21,24 @@ function App() {
           />
           <Route exact path="/checkout" element={<Checkout />} />
           <Route exact path="/cart" element={<Cart />} />
-          <Route exact path="/signin" element={<SignIn />} />
-          <Route exact path="/register" element={<Register />} />
+          <Route
+            exact
+            path="/signin"
+            element={
+              <Protected>
+                <SignIn />
+              </Protected>
+            }
+          />
+          <Route
+            exact
+            path="/register"
+            element={
+              <Protected>
+                <Register />
+              </Protected>
+            }
+          />
           <Route exact path="*" element={<ErrorPage />} />
         </Routes>
       </div>

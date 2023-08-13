@@ -1,12 +1,26 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import shopicon from "../../assets/images/shop-icon.png";
+import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { registerUser } from "../../redux/auth/action";
+
 const index = () => {
+  const dispatch = useDispatch();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => {
+    dispatch(registerUser(data));
+  };
+
   return (
     <>
       <section>
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-          <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+          <div className="sm:mx-auto sm:w-full bg-gray-300 p-4  sm:max-w-sm">
             <img
               className="mx-auto h-10 w-auto"
               src={shopicon}
@@ -17,8 +31,12 @@ const index = () => {
             </h2>
           </div>
 
-          <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form className="space-y-6" action="#" method="POST">
+          <div className="bg-gray-300 p-4  sm:mx-auto sm:w-full sm:max-w-sm">
+            <form
+              className="space-y-6"
+              noValidate
+              onSubmit={handleSubmit(onSubmit)}
+            >
               <div>
                 <label
                   htmlFor="name"
@@ -30,11 +48,22 @@ const index = () => {
                   <input
                     id="name"
                     name="name"
+                    placeholder="John Doe"
                     type="text"
                     autoComplete="name"
                     required
+                    {...register("name", {
+                      required: "Enter full name",
+                      pattern: {
+                        value: /^[A-Za-z\s]+$/,
+                        message: "Enter full name",
+                      },
+                    })}
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-lime-600 sm:text-sm sm:leading-6"
                   />
+                  {errors.name && (
+                    <p className="text-red-500">{errors.name.message}</p>
+                  )}
                 </div>
               </div>
               <div>
@@ -48,11 +77,22 @@ const index = () => {
                   <input
                     id="email"
                     name="email"
+                    placeholder="John@gmail.com"
                     type="email"
                     autoComplete="email"
                     required
+                    {...register("email", {
+                      required: "email is required",
+                      pattern: {
+                        value: /\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi,
+                        message: "email not valid",
+                      },
+                    })}
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-lime-600 sm:text-sm sm:leading-6"
                   />
+                  {errors.email && (
+                    <p className="text-red-500">{errors.email.message}</p>
+                  )}
                 </div>
               </div>
 
@@ -70,10 +110,17 @@ const index = () => {
                     id="password"
                     name="password"
                     type="password"
+                    placeholder="password"
                     autoComplete="current-password"
                     required
+                    {...register("password", {
+                      required: "password is required",
+                    })}
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-lime-600 sm:text-sm sm:leading-6"
                   />
+                  {errors.password && (
+                    <p className="text-red-500">{errors.password.message}</p>
+                  )}
                 </div>
               </div>
 
@@ -88,13 +135,25 @@ const index = () => {
                 </div>
                 <div className="mt-2">
                   <input
-                    id="consfirmpassword"
-                    name="consfirmpassword"
+                    id="consfirmPassword"
+                    name="consfirmPassword"
                     type="password"
+                    placeholder="confirm password"
                     autoComplete="confirmcurrent-password"
                     required
+                    {...register("confirmPassword", {
+                      required: "confirm password is required",
+                      validate: (value, formValues) =>
+                        value === formValues.password ||
+                        "password not matching",
+                    })}
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-lime-600 sm:text-sm sm:leading-6"
                   />
+                  {errors.confirmPassword && (
+                    <p className="text-red-500">
+                      {errors.confirmPassword.message}
+                    </p>
+                  )}
                 </div>
               </div>
 

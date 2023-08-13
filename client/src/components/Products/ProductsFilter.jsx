@@ -26,10 +26,9 @@ const ProductsFilter = () => {
   const dispatch = useDispatch();
 
   const handleCategory = (e) => {
-    e.target.checked &&
-      setFilterProduct(() => [...filterProduct, e.target.value]);
-    if (e.target.checked && filterProduct) {
-      dispatch(getFilterProducts([...filterProduct, e.target.value]));
+    setFilterProduct(() => [...filterProduct, e.target.value]);
+    if (e.target.checked) {
+      dispatch(getFilterProducts([e.target.value]));
     } else {
       //code to remove categries from array
       dispatch(getAllProducts());

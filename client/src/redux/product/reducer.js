@@ -22,12 +22,14 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         loading: payload,
+        error: null,
       };
     case GET_ALL_PRODUCTS:
       return {
         ...state,
         loading: false,
         products: payload,
+        error: null,
       };
 
     case GET_FILTER_PRODUCTS:
@@ -35,6 +37,7 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         loading: false,
         products: payload,
+        error: null,
       };
 
     case GET_SORTED_PRODUCTS:
@@ -42,12 +45,14 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         loading: false,
         products: payload,
+        error: null,
       };
     case GET_PRODUCT_DETAILS:
       return {
         ...state,
         loading: false,
         productDetails: payload,
+        error: null,
       };
 
     case PAGE:
@@ -55,6 +60,7 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         loading: false,
         page: state.page + payload,
+        error: null,
       };
 
     case ERROR:

@@ -46,7 +46,7 @@ const Productslist = () => {
                       </Link>
                     </h3>
                     <div className="mt-1 text-sm text-gray-500">
-                      <Rating value={4} />
+                      <Rating value={Math.round(product.rating)} />
                       <span>{product.rating} out of 5</span>
                     </div>
                   </div>

@@ -1,12 +1,12 @@
 import React from "react";
-import Navbar from "../components/common/Navbar";
+import Footer from "../components/common/Footer";
 import Signin from "../components/signin/SignIn";
 
 const SignIn = () => {
   return (
     <>
-      <Navbar />
       <Signin />
+      <Footer />
     </>
   );
 };
