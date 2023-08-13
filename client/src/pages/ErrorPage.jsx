@@ -6,6 +6,7 @@ const ErrorPage = () => {
   return (
     <>
       <Navbar />
+      ERRoR page
       <Footer />
     </>
   );
