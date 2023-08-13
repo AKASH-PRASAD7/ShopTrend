@@ -1,0 +1,7 @@
+export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
+export const GET_FILTER_PRODUCTS = "GET_FILTER_PRODUCTS";
+export const GET_SORTED_PRODUCTS = "GET_SORTED_PRODUCTS";
+export const GET_PRODUCT_DETAILS = "GET_PRODUCT_DETAILS";
+export const LOADING = "LOADING";
+export const ERROR = "ERROR";
+export const PAGE = "PAGE";

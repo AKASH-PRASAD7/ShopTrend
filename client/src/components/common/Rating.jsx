@@ -29,11 +29,3 @@ const Rating = ({ value }) => {
 };
 
 export default Rating;
-{
-  /* <Rating
-            key={index}
-            className={`text-yellow-500 ${
-              index < value ? "fill-current" : "stroke-current"
-            }`}
-          /> */
-}
