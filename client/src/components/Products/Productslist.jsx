@@ -14,7 +14,7 @@ const Productslist = () => {
   // console.log(prod);
   useEffect(() => {
     dispatch(getAllProducts(10));
-  }, []);
+  }, [dispatch]);
 
   if (loading) {
     return <LoadingProducts />;

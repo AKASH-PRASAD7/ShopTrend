@@ -1,14 +1,15 @@
 import {
   SIGN_IN,
   SIGN_OUT,
-  LOADING,
+  USER_LOADING,
   REGISTER,
+  GET_USER,
   ADD_TO_CART,
   ERROR,
 } from "./type";
 
 const initalState = {
-  cart: {},
+  cart: { items: [] },
   name: "",
   email: "",
   password: "",
@@ -18,13 +19,20 @@ const initalState = {
 
 const reducer = (state = initalState, action) => {
   switch (action.type) {
-    case LOADING:
+    case USER_LOADING:
       return {
         ...state,
         loading: action.payload,
         error: null,
       };
     case SIGN_IN:
+      return {
+        ...state,
+        ...action.payload,
+        loading: false,
+        error: null,
+      };
+    case GET_USER:
       return {
         ...state,
         ...action.payload,
@@ -44,7 +52,7 @@ const reducer = (state = initalState, action) => {
     case ADD_TO_CART:
       return {
         ...state,
-        cart: { ...action.payload },
+        ...action.payload,
         error: null,
         loading: false,
       };

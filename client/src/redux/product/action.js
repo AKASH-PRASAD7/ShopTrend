@@ -42,6 +42,7 @@ export const getProductDetails = (id) => async (dispatch) => {
     });
 
     const response = await fetch(`https://dummyjson.com/products/${id}`);
+
     if (!response.ok) {
       throw new Error("Failed to get product details");
     }

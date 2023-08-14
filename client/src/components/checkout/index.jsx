@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import { useSelector } from "react-redux";
 const products = [
   {
     id: 1,
@@ -48,6 +48,8 @@ const addresses = [
   },
 ];
 const index = () => {
+  const { cart } = useSelector((state) => state.user);
+  const { items } = cart;
   return (
     <>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -77,7 +79,7 @@ const index = () => {
                           name="first-name"
                           id="first-name"
                           autoComplete="given-name"
-                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                         />
                       </div>
                     </div>
@@ -95,7 +97,7 @@ const index = () => {
                           name="last-name"
                           id="last-name"
                           autoComplete="family-name"
-                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                         />
                       </div>
                     </div>
@@ -113,7 +115,7 @@ const index = () => {
                           name="email"
                           type="email"
                           autoComplete="email"
-                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                         />
                       </div>
                     </div>
@@ -130,7 +132,7 @@ const index = () => {
                           id="country"
                           name="country"
                           autoComplete="country-name"
-                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:max-w-xs sm:text-sm sm:leading-6"
                         >
                           <option>United States</option>
                           <option>Canada</option>
@@ -152,7 +154,7 @@ const index = () => {
                           name="street-address"
                           id="street-address"
                           autoComplete="street-address"
-                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                         />
                       </div>
                     </div>
@@ -170,7 +172,7 @@ const index = () => {
                           name="city"
                           id="city"
                           autoComplete="address-level2"
-                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                         />
                       </div>
                     </div>
@@ -188,7 +190,7 @@ const index = () => {
                           name="region"
                           id="region"
                           autoComplete="address-level1"
-                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                         />
                       </div>
                     </div>
@@ -206,7 +208,7 @@ const index = () => {
                           name="postal-code"
                           id="postal-code"
                           autoComplete="postal-code"
-                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                         />
                       </div>
                     </div>
@@ -222,7 +224,7 @@ const index = () => {
                   </button>
                   <button
                     type="submit"
-                    className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    className="rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
                   >
                     Add Address
                   </button>
@@ -245,7 +247,7 @@ const index = () => {
                           <input
                             name="address"
                             type="radio"
-                            className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                            className="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-600"
                           />
                           <div className="min-w-0 flex-auto">
                             <p className="text-sm font-semibold leading-6 text-gray-900">
@@ -285,7 +287,7 @@ const index = () => {
                             id="cash"
                             name="payments"
                             type="radio"
-                            className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                            className="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-600"
                           />
                           <label
                             htmlFor="cash"
@@ -299,7 +301,7 @@ const index = () => {
                             id="card"
                             name="payments"
                             type="radio"
-                            className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                            className="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-600"
                           />
                           <label
                             htmlFor="card"
@@ -316,34 +318,44 @@ const index = () => {
             </form>
           </div>
           <div className="lg:col-span-2">
-            <div className="mx-auto mt-12 bg-white max-w-7xl px-0 sm:px-0 lg:px-0">
+            <div className="mx-auto mx-8 mt-12 mx-6 bg-white max-w-7xl px-4 sm:px-6 lg:px-8">
               <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
                 <h1 className="text-4xl my-5 font-bold tracking-tight text-gray-900">
                   Cart
                 </h1>
                 <div className="flow-root">
                   <ul role="list" className="-my-6 divide-y divide-gray-200">
-                    {products.map((product) => (
+                    {items.map((product) => (
                       <li key={product.id} className="flex py-6">
                         <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                           <img
-                            src={product.imageSrc}
-                            alt={product.imageAlt}
+                            src={product.thumbnail}
+                            alt={product.title}
                             className="h-full w-full object-cover object-center"
                           />
                         </div>
 
                         <div className="ml-4 flex flex-1 flex-col">
                           <div>
-                            <div className="flex justify-between text-base font-medium text-gray-900">
+                            <div className="flex justify-between text-lime-600 text-base font-medium text-gray-900">
                               <h3>
-                                <a href={product.href}>{product.name}</a>
+                                <p>{product.title}</p>
                               </h3>
-                              <p className="ml-4">{product.price}</p>
+                              <div>
+                                <p className="ml-4">${product.price}</p>
+                                <p className="text-sm ml-4  text-red-700 line-through  font-medium text-gray-900">
+                                  $
+                                  {Math.round(
+                                    product.price /
+                                      (1 - product.discountPercentage / 100)
+                                  )}
+                                </p>
+                              </div>
                             </div>
-                            <p className="mt-1 text-sm text-gray-500">
-                              {product.color}
-                            </p>
+
+                            {/* <p className="mt-1 text-sm text-gray-500">
+                            {product.color}
+                          </p> */}
                           </div>
                           <div className="flex flex-1 items-end justify-between text-sm">
                             <div className="text-gray-500">
@@ -362,7 +374,7 @@ const index = () => {
                             <div className="flex">
                               <button
                                 type="button"
-                                className="font-medium text-indigo-600 hover:text-indigo-500"
+                                className="font-medium text-blue-600 hover:text-blue-500"
                               >
                                 Remove
                               </button>
@@ -376,17 +388,32 @@ const index = () => {
               </div>
 
               <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
-                <div className="flex justify-between text-base font-medium text-gray-900">
+                <div className="flex justify-between text-base text-lime-600 font-medium text-gray-900">
                   <p>Subtotal</p>
-                  <p>$262.00</p>
+                  <div>
+                    <p>
+                      ${items.reduce((accum, item) => accum + item.price, 0)}
+                    </p>
+                    <p className="text-sm text-red-700 line-through  font-medium text-gray-900">
+                      $
+                      {items.reduce(
+                        (accum, item) =>
+                          accum +
+                          Math.round(
+                            item.price / (1 - item.discountPercentage / 100)
+                          ),
+                        0
+                      )}
+                    </p>
+                  </div>
                 </div>
                 <p className="mt-0.5 text-sm text-gray-500">
                   Shipping and taxes calculated at checkout.
                 </p>
                 <div className="mt-6">
                   <Link
-                    to="/pay"
-                    className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+                    to="/checkout"
+                    className="flex  mx-auto items-center justify-center rounded-md border border-transparent bg-blue-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-blue-700"
                   >
                     Pay and Order
                   </Link>
@@ -397,7 +424,7 @@ const index = () => {
                     <Link to="/">
                       <button
                         type="button"
-                        className="font-medium text-indigo-600 hover:text-indigo-500"
+                        className="font-medium text-blue-600 hover:text-blue-500"
                       >
                         Continue Shopping
                         <span aria-hidden="true"> &rarr;</span>

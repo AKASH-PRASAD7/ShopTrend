@@ -12,7 +12,17 @@ const initialState = {
   loading: false,
   error: null,
   products: [],
-  productDetails: [],
+  productDetails: {
+    title: "",
+    description: "",
+    price: "",
+    discountPercentage: "",
+    rating: "",
+    brand: "",
+    category: "",
+    thumbnail: "",
+    images: [],
+  },
   page: 1,
 };
 

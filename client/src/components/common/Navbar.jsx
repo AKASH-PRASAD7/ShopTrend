@@ -2,6 +2,8 @@ import React from "react";
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { signOut } from "../../redux/auth/action";
 import {
   Bars3Icon,
   ShoppingCartIcon,
@@ -9,12 +11,19 @@ import {
 } from "@heroicons/react/24/outline";
 
 import shopicon from "../../assets/images/shop-icon.png";
-
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 const Navbar = () => {
+  const dispatch = useDispatch();
+  const { cart, email } = useSelector((state) => state.user);
+
+  const handleSignout = (e) => {
+    e.preventDefault();
+    dispatch(signOut());
+  };
+
   return (
     <>
       <nav>
@@ -58,14 +67,16 @@ const Navbar = () => {
                     </div>
                   </div>
                   <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                    <Link to="/signin">
-                      <button
-                        type="button"
-                        className="relative rounded-full bg-lime-500 p-1 text-white hover:bg-lime-600 mx-2 w-24 font-bold"
-                      >
-                        Sign In
-                      </button>
-                    </Link>
+                    {!email && (
+                      <Link to="/signin">
+                        <button
+                          type="button"
+                          className="relative rounded-full bg-lime-500 p-1 text-white hover:bg-lime-600 mx-2 w-24 font-bold"
+                        >
+                          Sign In
+                        </button>
+                      </Link>
+                    )}
                     <Link to="/cart">
                       <button
                         type="button"
@@ -79,11 +90,13 @@ const Navbar = () => {
                         />
                       </button>
                     </Link>
-                    <Link className="z-10" to="/cart">
-                      <span className="inline-flex items-center rounded-full bg-red-500 hover:bg-red-700 mb-7 -ml-4  px-2 py-1 text-xs font-medium text-white ring-1 ring-inset ring-red-600/10">
-                        3
-                      </span>
-                    </Link>
+                    {cart.items.length > 0 && (
+                      <Link className="z-10" to="/cart">
+                        <span className="inline-flex items-center rounded-full bg-red-500 hover:bg-red-700 mb-7 -ml-4  px-2 py-1 text-xs font-medium text-white ring-1 ring-inset ring-red-600/10">
+                          {cart.items.length}
+                        </span>
+                      </Link>
+                    )}
 
                     {/* Profile dropdown */}
                     <Menu as="div" className="relative ml-3">
@@ -110,41 +123,39 @@ const Navbar = () => {
                         <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                           <Menu.Item>
                             {({ active }) => (
-                              <a
-                                href="#"
+                              <button
                                 className={classNames(
                                   active ? "bg-gray-100" : "",
                                   "block px-4 py-2 text-sm text-gray-700"
                                 )}
                               >
                                 Your Profile
-                              </a>
+                              </button>
                             )}
                           </Menu.Item>
                           <Menu.Item>
                             {({ active }) => (
-                              <a
-                                href="#"
+                              <button
                                 className={classNames(
                                   active ? "bg-gray-100" : "",
                                   "block px-4 py-2 text-sm text-gray-700"
                                 )}
                               >
                                 Settings
-                              </a>
+                              </button>
                             )}
                           </Menu.Item>
                           <Menu.Item>
                             {({ active }) => (
-                              <a
-                                href="#"
+                              <button
+                                onClick={(e) => handleSignout(e)}
                                 className={classNames(
                                   active ? "bg-gray-100" : "",
                                   "block px-4 py-2 text-sm text-gray-700"
                                 )}
                               >
                                 Sign out
-                              </a>
+                              </button>
                             )}
                           </Menu.Item>
                         </Menu.Items>

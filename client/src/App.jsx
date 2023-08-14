@@ -8,7 +8,14 @@ import Cart from "./pages/Cart";
 import SignIn from "./pages/SignIn";
 import Register from "./pages/Register";
 import Protected from "./components/common/Protected";
+import { useDispatch } from "react-redux";
+import { getUser } from "./redux/auth/action";
+import { useEffect } from "react";
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getUser());
+  }, []);
   return (
     <>
       <div>
