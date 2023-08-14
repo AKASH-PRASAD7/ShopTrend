@@ -1,0 +1,86 @@
+type ProductDetails @model {
+  id: ID!
+  title: String!
+  description: String!
+  price: Float!
+  discountPercentage: Float!
+  rating: Float!
+  brand: String!
+  category: String!
+  thumbnail: String!
+  images: [String!]!
+}
+
+type Products @model {
+  products: [ProductDetails]!
+}
+
+# get all productdetails
+
+# query ProductDetailsCollection {
+#   productDetailsCollection(first: 10) {
+#     edges {
+#       node {
+#         title
+#         description
+#         price
+#         discountPercentage
+#         brand
+#         category
+#         thumbnail
+#         images
+#         id
+#       }
+#     }
+#     pageInfo {
+#       hasNextPage
+#     }
+#   }
+# }
+
+# get all product
+# query ProductDetailsCollection {
+#   productDetailsCollection(first: 10) {
+#     pageInfo {
+#       hasNextPage
+#     }
+#     edges {
+#       node {
+#         title
+#         description
+#         price
+#         discountPercentage
+#         rating
+#         brand
+#         thumbnail
+#         category
+#         id
+#         images
+#       }
+#     }
+#   }
+# }
+
+# create productdetails single
+
+# mutation ProductDetailsCreate {
+#   productDetailsCreate(input: {
+
+#     title: "Samsung Universe 9",
+#     description: "Samsung's new variant which goes beyond Galaxy to the Universe",
+#     price: 1249,
+#     discountPercentage: 15.46,
+#     rating: 4.09,
+
+#     brand: "Samsung",
+#     category: "smartphones",
+#     thumbnail: "https://i.dummyjson.com/data/products/3/thumbnail.jpg",
+#     images: [
+#       "https://i.dummyjson.com/data/products/3/1.jpg"
+#     ]
+#   }) {
+#     productDetails {
+#       title
+#     }
+#   }
+# }
