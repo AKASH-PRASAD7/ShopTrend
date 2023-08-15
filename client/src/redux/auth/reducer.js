@@ -5,6 +5,8 @@ import {
   REGISTER,
   GET_USER,
   ADD_TO_CART,
+  REMOVE_CART_ITEM,
+  CHANGE_QTY,
   ERROR,
 } from "./type";
 
@@ -50,6 +52,20 @@ const reducer = (state = initalState, action) => {
       return initalState;
 
     case ADD_TO_CART:
+      return {
+        ...state,
+        ...action.payload,
+        error: null,
+        loading: false,
+      };
+    case REMOVE_CART_ITEM:
+      return {
+        ...state,
+        ...action.payload,
+        error: null,
+        loading: false,
+      };
+    case CHANGE_QTY:
       return {
         ...state,
         ...action.payload,

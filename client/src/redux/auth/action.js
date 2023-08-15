@@ -6,6 +6,8 @@ import {
   GET_USER,
   REGISTER,
   ERROR,
+  REMOVE_CART_ITEM,
+  CHANGE_QTY,
 } from "./type";
 
 export const signIn = (userData) => async (dispatch) => {
@@ -139,6 +141,74 @@ export const getUser = () => async (dispatch) => {
     return dispatch({
       type: GET_USER,
       payload: user,
+    });
+  } catch (error) {
+    return dispatch({
+      type: ERROR,
+      payload: error.message,
+    });
+  }
+};
+
+export const changeItemQyty = (itemId, newQty) => async (dispatch) => {
+  try {
+    dispatch({ type: USER_LOADING, payload: true });
+
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    const updatedCart = user.cart.items.map((item) => {
+      if (item.id === itemId) {
+        return {
+          ...item,
+          qty: newQty,
+        };
+      }
+      return item; // Return unchanged items
+    });
+
+    const updatedUser = {
+      ...user,
+      cart: {
+        ...user.cart,
+        items: updatedCart,
+      },
+    };
+
+    localStorage.setItem("user", JSON.stringify(updatedUser));
+
+    return dispatch({
+      type: CHANGE_QTY,
+      payload: updatedUser,
+    });
+  } catch (error) {
+    return dispatch({
+      type: ERROR,
+      payload: error.message,
+    });
+  }
+};
+
+export const removeItemFromCart = (itemId) => async (dispatch) => {
+  try {
+    dispatch({ type: USER_LOADING, payload: true });
+
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    const updatedCart = user.cart.items.filter((item) => item.id !== itemId);
+
+    const updatedUser = {
+      ...user,
+      cart: {
+        ...user.cart,
+        items: updatedCart,
+      },
+    };
+
+    localStorage.setItem("user", JSON.stringify(updatedUser));
+
+    return dispatch({
+      type: REMOVE_CART_ITEM,
+      payload: updatedUser,
     });
   } catch (error) {
     return dispatch({

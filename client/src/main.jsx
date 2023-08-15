@@ -6,12 +6,8 @@ import "./App.css";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./redux/store";
-import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
-
-const client = new ApolloClient({
-  uri: "http://localhost:4000/graphql",
-  cache: new InMemoryCache(),
-});
+import { ApolloProvider } from "@apollo/client";
+import client from "./query/client";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
