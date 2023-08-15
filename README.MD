@@ -4,6 +4,9 @@ Welcome to ShopTrend! 🎉 This is a cutting-edge e-commerce app built with Vite
 
 ## Images
 ![ShopTrend Logo](client/src/assets/images/1.png)
+![ShopTrend Logo](client/src/assets/images/2.png)
+![ShopTrend Logo](client/src/assets/images/3.png)
+![ShopTrend Logo](client/src/assets/images/45.png)
 
 
 ### Installation 🚀
