@@ -8,23 +8,32 @@ import {
   LOADING,
 } from "./type";
 
-export const getAllProducts = (skip) => async (dispatch) => {
-  try {
-    dispatch({
-      type: LOADING,
-      payload: true,
-    });
+import {
+  GET_PRODUCTS,
+  SEARCH_PRODUCTS,
+  GET_PRODUCT_BY_ID,
+} from "../../query/queries";
+import client from "../../query/client";
 
-    const response = await fetch(
-      `https://dummyjson.com/products?limit=10&${skip}`
-    );
-    if (!response.ok) {
-      throw new Error("Failed to fetch products");
+export const getAllProducts = () => async (dispatch) => {
+  try {
+    const { loading, error, data } = await client.query({
+      query: GET_PRODUCTS,
+    });
+    if (loading) {
+      dispatch({
+        type: LOADING,
+        payload: true,
+      });
     }
-    const data = await response.json();
+
+    if (error) {
+      throw new Error(error.message);
+    }
+
     return dispatch({
       type: GET_ALL_PRODUCTS,
-      payload: data.products,
+      payload: data.productDetailsCollection.edges,
     });
   } catch (error) {
     return dispatch({
@@ -36,20 +45,26 @@ export const getAllProducts = (skip) => async (dispatch) => {
 
 export const getProductDetails = (id) => async (dispatch) => {
   try {
-    dispatch({
-      type: LOADING,
-      payload: true,
+    const { loading, error, data } = await client.query({
+      query: GET_PRODUCT_BY_ID,
+      variables: {
+        id,
+      },
     });
-
-    const response = await fetch(`https://dummyjson.com/products/${id}`);
-
-    if (!response.ok) {
-      throw new Error("Failed to get product details");
+    if (loading) {
+      dispatch({
+        type: LOADING,
+        payload: true,
+      });
     }
-    const data = await response.json();
+
+    if (error) {
+      throw new Error(error.message);
+    }
+
     return dispatch({
       type: GET_PRODUCT_DETAILS,
-      payload: data,
+      payload: data.productDetails,
     });
   } catch (error) {
     return dispatch({
@@ -61,24 +76,28 @@ export const getProductDetails = (id) => async (dispatch) => {
 
 export const getFilterProducts = (filter) => async (dispatch) => {
   try {
-    dispatch({
-      type: LOADING,
-      payload: true,
+    const filterString = filter.join(",");
+
+    const { loading, error, data } = await client.query({
+      query: SEARCH_PRODUCTS,
+      variables: {
+        input: filterString,
+      },
     });
-
-    //fetch from graphql api
-
-    const response = await fetch(
-      `https://dummyjson.com/products/category/${filter[0]}`
-    );
-    if (!response.ok) {
-      throw new Error("Failed to filter products");
+    if (loading) {
+      dispatch({
+        type: LOADING,
+        payload: true,
+      });
     }
-    const data = await response.json();
+
+    if (error) {
+      throw new Error(error.message);
+    }
 
     return dispatch({
       type: GET_FILTER_PRODUCTS,
-      payload: data.products,
+      payload: data.productDetailsSearch.edges,
     });
   } catch (error) {
     return dispatch({
@@ -88,24 +107,39 @@ export const getFilterProducts = (filter) => async (dispatch) => {
   }
 };
 
-export const getSortedProducts = (sort) => async (dispatch) => {
+export const getSortedProducts = (products, sort) => async (dispatch) => {
   try {
     dispatch({
       type: LOADING,
       payload: true,
     });
-    //fetch from graphql api
-    // const response = await fetch(
-    //   `https://dummyjson.com/products/category/${sort}`
-    // );
-    // if (!response.ok) {
-    //   throw new Error("Failed to filter products");
-    // }
-    // const data = await response.json();
-    return dispatch({
-      type: GET_SORTED_PRODUCTS,
-      payload: data.products,
-    });
+    if (sort === "Best Rating") {
+      const productsSortedByRating = products
+        .slice()
+        .sort((a, b) => b.node.rating - a.node.rating);
+      return dispatch({
+        type: GET_SORTED_PRODUCTS,
+        payload: productsSortedByRating,
+      });
+    }
+    if (sort === "Price: Low to High") {
+      const productsSortedByPrice = products
+        .slice()
+        .sort((a, b) => a.node.price - b.node.price);
+      return dispatch({
+        type: GET_SORTED_PRODUCTS,
+        payload: productsSortedByPrice,
+      });
+    }
+    if (sort === "Price: High to Low") {
+      const productsSortedByPriceDescending = products
+        .slice()
+        .sort((a, b) => b.node.price - a.node.price);
+      return dispatch({
+        type: GET_SORTED_PRODUCTS,
+        payload: productsSortedByPriceDescending,
+      });
+    }
   } catch (error) {
     return dispatch({
       type: ERROR,

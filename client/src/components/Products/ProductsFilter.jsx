@@ -13,31 +13,41 @@ import Productslist from "./Productslist";
 import Pagination from "./Pagination";
 import filters from "../../assets/data/filters.json";
 import sortOptions from "../../assets/data/sortOptions.json";
-import { useDispatch } from "react-redux";
-import { getFilterProducts, getAllProducts } from "../../redux/product/action";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getFilterProducts,
+  getAllProducts,
+  getSortedProducts,
+} from "../../redux/product/action";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 const ProductsFilter = () => {
+  const { products } = useSelector((state) => state.product);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [filterProduct, setFilterProduct] = useState([]);
   const dispatch = useDispatch();
 
   const handleCategory = (e) => {
-    setFilterProduct(() => [...filterProduct, e.target.value]);
+    let filters = [...filterProduct, e.target.value];
+    setFilterProduct(() => [...filters]);
     if (e.target.checked) {
-      dispatch(getFilterProducts([e.target.value]));
+      dispatch(getFilterProducts(filters));
     } else {
-      //code to remove categries from array
-      dispatch(getAllProducts());
+      let newFilter = filterProduct.filter((each) => each != e.target.value);
+      setFilterProduct(() => [...newFilter]);
+      if (newFilter.length === 0) {
+        dispatch(getAllProducts());
+      } else {
+        dispatch(getFilterProducts(newFilter));
+      }
     }
   };
-
   const handleSort = (e, value) => {
     e.preventDefault();
-    console.log(value);
+    dispatch(getSortedProducts(products, value));
   };
 
   return (
