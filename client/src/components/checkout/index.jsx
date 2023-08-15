@@ -238,9 +238,9 @@ const index = () => {
                     Choose from Existing addresses
                   </p>
                   <ul role="list">
-                    {addresses.map((address) => (
+                    {addresses.map((address, index) => (
                       <li
-                        key={address.email}
+                        key={index}
                         className="flex justify-between gap-x-6 px-5 py-5 border-solid border-2 border-gray-200"
                       >
                         <div className="flex gap-x-4">

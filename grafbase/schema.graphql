@@ -1,0 +1,133 @@
+type ProductDetails @model {
+  id: ID!
+  title: String!
+  description: String!
+  price: Float!
+  discountPercentage: Float!
+  rating: Float!
+  brand: String!
+  category: String!
+  thumbnail: String!
+  images: [String!]!
+}
+
+type Products @model {
+  products: [ProductDetails]!
+}
+
+type Items @model {
+  userid: ID!
+  qty: Int
+  id: ID!
+  price: Decimal
+  discountPercentage: Float
+  thumbnail: String
+  title: String
+}
+
+type Address @model {
+  name: String
+  email: String
+  phone: String
+  street: String
+  city: String
+  state: String
+  postalcode: String
+}
+
+type Order @model {
+  ordereditems: [Items]
+}
+
+type User @model {
+  id: ID!
+  name: String
+  email: String! @unique
+  password: String
+  cart: [Items]
+  addresses: [Address]
+  orders: [Order]
+}
+
+# get all productdetails
+
+# query ProductDetailsCollection {
+#   productDetailsCollection(first: 10) {
+#     edges {
+#       node {
+#         title
+#         description
+#         price
+#         discountPercentage
+#         brand
+#         category
+#         thumbnail
+#         images
+#         id
+#       }
+#     }
+#     pageInfo {
+#       hasNextPage
+#     }
+#   }
+# }
+
+# get all product
+# query ProductDetailsCollection {
+#   productDetailsCollection(first: 10) {
+#     pageInfo {
+#       hasNextPage
+#     }
+#     edges {
+#       node {
+#         title
+#         description
+#         price
+#         discountPercentage
+#         rating
+#         brand
+#         thumbnail
+#         category
+#         id
+#         images
+#       }
+#     }
+#   }
+# }
+
+# create productdetails single
+
+# mutation ProductDetailsCreate {
+#   productDetailsCreate(input: {
+
+#     title: "Samsung Universe 9",
+#     description: "Samsung's new variant which goes beyond Galaxy to the Universe",
+#     price: 1249,
+#     discountPercentage: 15.46,
+#     rating: 4.09,
+
+#     brand: "Samsung",
+#     category: "smartphones",
+#     thumbnail: "https://i.dummyjson.com/data/products/3/thumbnail.jpg",
+#     images: [
+#       "https://i.dummyjson.com/data/products/3/1.jpg"
+#     ]
+#   }) {
+#     productDetails {
+#       title
+#     }
+#   }
+# }
+
+# craete user
+# mutation UserCreate {
+#   userCreate(input: {
+#     name: "John Doe",
+#     email: "john@email.com",
+#     password: "1234"
+#   }) {
+#     user {
+#       name
+#     }
+#   }
+# }
