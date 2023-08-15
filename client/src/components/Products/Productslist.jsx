@@ -10,7 +10,7 @@ import LoadingProducts from "./LoadingProducts";
 const Productslist = () => {
   const dispatch = useDispatch();
   const { loading, error, products } = useSelector((state) => state.product);
-  console.log(products);
+
   useEffect(() => {
     dispatch(getAllProducts());
   }, [dispatch]);

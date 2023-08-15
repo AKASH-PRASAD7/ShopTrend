@@ -17,6 +17,10 @@ import client from "../../query/client";
 
 export const getAllProducts = () => async (dispatch) => {
   try {
+    dispatch({
+      type: LOADING,
+      payload: true,
+    });
     const { loading, error, data } = await client.query({
       query: GET_PRODUCTS,
     });
@@ -45,6 +49,10 @@ export const getAllProducts = () => async (dispatch) => {
 
 export const getProductDetails = (id) => async (dispatch) => {
   try {
+    dispatch({
+      type: LOADING,
+      payload: true,
+    });
     const { loading, error, data } = await client.query({
       query: GET_PRODUCT_BY_ID,
       variables: {
@@ -77,6 +85,10 @@ export const getProductDetails = (id) => async (dispatch) => {
 export const getFilterProducts = (filter) => async (dispatch) => {
   try {
     const filterString = filter.join(",");
+    dispatch({
+      type: LOADING,
+      payload: true,
+    });
 
     const { loading, error, data } = await client.query({
       query: SEARCH_PRODUCTS,

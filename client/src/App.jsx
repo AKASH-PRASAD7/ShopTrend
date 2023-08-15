@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 import { getUser } from "./redux/auth/action";
 import { useEffect } from "react";
 import CheckoutProtected from "./components/checkout/CheckoutProtected";
+import OrderSuccess from "./pages/OrderSuccess";
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -54,6 +55,15 @@ function App() {
               <Protected>
                 <Register />
               </Protected>
+            }
+          />
+          <Route
+            exact
+            path="/ordersuccess/:id"
+            element={
+              // <CheckoutProtected>
+              <OrderSuccess />
+              // </CheckoutProtected>
             }
           />
           <Route exact path="*" element={<ErrorPage />} />

@@ -7,6 +7,7 @@ import {
   ADD_TO_CART,
   REMOVE_CART_ITEM,
   CHANGE_QTY,
+  EMPTY_CART,
   ERROR,
 } from "./type";
 
@@ -59,6 +60,13 @@ const reducer = (state = initalState, action) => {
         loading: false,
       };
     case REMOVE_CART_ITEM:
+      return {
+        ...state,
+        ...action.payload,
+        error: null,
+        loading: false,
+      };
+    case EMPTY_CART:
       return {
         ...state,
         ...action.payload,

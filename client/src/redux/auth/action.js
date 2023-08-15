@@ -8,6 +8,7 @@ import {
   ERROR,
   REMOVE_CART_ITEM,
   CHANGE_QTY,
+  EMPTY_CART,
 } from "./type";
 
 export const signIn = (userData) => async (dispatch) => {
@@ -208,6 +209,33 @@ export const removeItemFromCart = (itemId) => async (dispatch) => {
 
     return dispatch({
       type: REMOVE_CART_ITEM,
+      payload: updatedUser,
+    });
+  } catch (error) {
+    return dispatch({
+      type: ERROR,
+      payload: error.message,
+    });
+  }
+};
+
+export const emptyCart = () => async (dispatch) => {
+  try {
+    dispatch({ type: USER_LOADING, payload: true });
+
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    const updatedUser = {
+      ...user,
+      cart: {
+        items: [],
+      },
+    };
+
+    localStorage.setItem("user", JSON.stringify(updatedUser));
+
+    return dispatch({
+      type: EMPTY_CART,
       payload: updatedUser,
     });
   } catch (error) {

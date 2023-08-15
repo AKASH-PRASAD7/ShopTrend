@@ -7,7 +7,7 @@ import {
 } from "react-icons/bi";
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 py-4">
+    <footer className="bg-gray-900 py-4 absolute  w-full">
       <div className="container mx-auto flex justify-center items-center">
         <div className="text-gray-400">
           <p className="text-center">

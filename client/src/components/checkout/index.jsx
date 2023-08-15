@@ -449,7 +449,7 @@ const index = () => {
                   </p>
                   <div className="mt-6">
                     <Link
-                      to="/checkout"
+                      to={`/ordersuccess/${items[0].id}`}
                       className="flex mx-auto items-center justify-center rounded-md border border-transparent bg-blue-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-blue-700"
                     >
                       Pay Now
