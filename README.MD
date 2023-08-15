@@ -15,10 +15,6 @@ Welcome to ShopTrend! 🎉 This is a cutting-edge ecommerce app built with Vite,
 
    Navigate to [http://127.0.0.1:4000/](http://127.0.0.1:4000/) to grafbase Pathfinder.
 
-   ```
-
-   ```
-
 2. **Clone the repository:**
 
    ```bash
