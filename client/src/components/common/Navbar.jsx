@@ -65,18 +65,23 @@ const Navbar = () => {
                         </p>
                       </Link>
                     </div>
+                    <div className="hidden sm:ml-6 sm:block">
+                      <div className="flex space-x-4">
+                        {/* <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" --> */}
+                        {!email && (
+                          <Link to="/signin">
+                            <button
+                              type="button"
+                              className="relative rounded-full bg-lime-500 p-1 text-white hover:bg-lime-600 mx-2 w-24 font-bold"
+                            >
+                              Sign In
+                            </button>
+                          </Link>
+                        )}
+                      </div>
+                    </div>
                   </div>
                   <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                    {!email && (
-                      <Link to="/signin">
-                        <button
-                          type="button"
-                          className="relative rounded-full bg-lime-500 p-1 text-white hover:bg-lime-600 mx-2 w-24 font-bold"
-                        >
-                          Sign In
-                        </button>
-                      </Link>
-                    )}
                     <Link to="/cart">
                       <button
                         type="button"
@@ -106,7 +111,7 @@ const Navbar = () => {
                           <span className="sr-only">Open user menu</span>
                           <img
                             className="h-8 w-8 rounded-full"
-                            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                            src="https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png"
                             alt=""
                           />
                         </Menu.Button>

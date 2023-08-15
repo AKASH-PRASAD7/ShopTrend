@@ -19,7 +19,7 @@ const EmptyCart = () => {
                   </h3>
                   <h4>Add something to make me happy :)</h4>
                   <Link to="/">
-                    <button class="bg-lime-500 hover:bg-lime-700 m-2 text-white font-bold py-2 px-4 rounded-full">
+                    <button className="bg-lime-500 hover:bg-lime-700 m-2 text-white font-bold py-2 px-4 rounded-full">
                       Continue shopping
                     </button>
                   </Link>

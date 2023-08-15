@@ -2,12 +2,27 @@ import React, { useState, Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import EmptyCart from "./EmptyCart";
+import { removeItemFromCart, changeItemQyty } from "../../redux/auth/action";
 
 const index = () => {
   const { cart } = useSelector((state) => state.user);
   const { items } = cart;
+  const dispatch = useDispatch();
+
+  const handleRemove = (e, ID) => {
+    e.preventDefault();
+    console.log(ID);
+    dispatch(removeItemFromCart(ID));
+  };
+
+  const handleQuantity = (e, ID) => {
+    e.preventDefault();
+    console.log(e.target.value);
+    console.log(ID);
+    dispatch(changeItemQyty(ID, e.target.value));
+  };
 
   if (items.length === 0) {
     return <EmptyCart />;
@@ -40,13 +55,16 @@ const index = () => {
                               <p>{product.title}</p>
                             </h3>
                             <div>
-                              <p className="ml-4">${product.price}</p>
+                              <p className="ml-4">
+                                ${product.qty * product.price}
+                              </p>
                               <p className="text-sm ml-4  text-red-700 line-through  font-medium text-gray-900">
                                 $
-                                {Math.round(
-                                  product.price /
-                                    (1 - product.discountPercentage / 100)
-                                )}
+                                {product.qty *
+                                  Math.round(
+                                    product.price /
+                                      (1 - product.discountPercentage / 100)
+                                  )}
                               </p>
                             </div>
                           </div>
@@ -63,15 +81,22 @@ const index = () => {
                             >
                               Qty
                             </label>
-                            <select>
+                            <select
+                              onChange={(e) => handleQuantity(e, product.id)}
+                              value={product.qty}
+                            >
                               <option value="1">1</option>
                               <option value="2">2</option>
+                              <option value="3">3</option>
+                              <option value="4">4</option>
+                              <option value="5">5</option>
                             </select>
                           </div>
 
                           <div className="flex">
                             <button
                               type="button"
+                              onClick={(e) => handleRemove(e, product.id)}
                               className="font-medium text-blue-600 hover:text-blue-500"
                             >
                               Remove
@@ -89,14 +114,21 @@ const index = () => {
               <div className="flex justify-between text-base text-lime-600 font-medium text-gray-900">
                 <p>Subtotal</p>
                 <div>
-                  <p>${items.reduce((accum, item) => accum + item.price, 0)}</p>
+                  <p>
+                    $
+                    {items.reduce(
+                      (accum, item) => accum + item.qty * item.price,
+                      0
+                    )}
+                  </p>
                   <p className="text-sm text-red-700 line-through  font-medium text-gray-900">
                     $
                     {items.reduce(
                       (accum, item) =>
                         accum +
                         Math.round(
-                          item.price / (1 - item.discountPercentage / 100)
+                          (item.price * item.qty) /
+                            (1 - item.discountPercentage / 100)
                         ),
                       0
                     )}

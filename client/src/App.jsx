@@ -11,6 +11,7 @@ import Protected from "./components/common/Protected";
 import { useDispatch } from "react-redux";
 import { getUser } from "./redux/auth/action";
 import { useEffect } from "react";
+import CheckoutProtected from "./components/checkout/CheckoutProtected";
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -26,7 +27,16 @@ function App() {
             path="/productdetails/:id"
             element={<ProductDetails />}
           />
-          <Route exact path="/checkout" element={<Checkout />} />
+          <Route
+            exact
+            path="/checkout"
+            element={
+              <CheckoutProtected>
+                {" "}
+                <Checkout />
+              </CheckoutProtected>
+            }
+          />
           <Route exact path="/cart" element={<Cart />} />
           <Route
             exact

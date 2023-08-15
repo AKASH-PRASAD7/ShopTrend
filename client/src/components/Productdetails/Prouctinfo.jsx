@@ -28,10 +28,10 @@ const Prouctinfo = () => {
   const { productDetails, loading, error } = useSelector(
     (state) => state.product
   );
+  const { email } = useSelector((state) => state.user);
   const { id } = useParams();
   const { cart } = useSelector((state) => state.user);
   const { items } = cart;
-  console.log(items);
 
   //check whether items already in cart or not
   const cuurItem = items.find((currentItem) => currentItem.id == id);
@@ -39,12 +39,33 @@ const Prouctinfo = () => {
 
   const handleCart = (e) => {
     e.preventDefault();
+    const cart1 = {
+      ...productDetails,
+      qty: 1,
+    };
     if (!items) {
-      dispatch(addToCart([productDetails]));
+      dispatch(addToCart([cart1]));
     } else {
-      let newItems = [...items, productDetails];
+      let newItems = [...items, cart1];
       dispatch(addToCart(newItems));
     }
+  };
+
+  const handleBuy = (e) => {
+    e.preventDefault();
+    console.log(productDetails);
+    const cart1 = {
+      ...productDetails,
+      qty: 1,
+    };
+    if (!items) {
+      dispatch(addToCart([cart1]));
+    } else {
+      let newItems = [...items, cart1];
+      dispatch(addToCart(newItems));
+    }
+
+    navigate("/checkout");
   };
   useEffect(() => {
     dispatch(getProductDetails(id));
@@ -196,6 +217,7 @@ const Prouctinfo = () => {
 
                   <Link to="/checkout">
                     <button
+                      onClick={(e) => handleBuy(e)}
                       type="submit"
                       className="mt-10 text-xl flex w-full items-center justify-center rounded-md border border-transparent bg-lime-600 px-8 py-3 text-base font-medium text-white hover:bg-lime-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                     >
