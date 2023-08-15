@@ -1,4 +1,4 @@
-# 🛍️ ShopTrend Ecommerce App
+# 🛍️ ShopTrend Ecommerce App (https://akash-prasad-shoptrend.netlify.app/)
 
 Welcome to ShopTrend! 🎉 This is a cutting-edge e-commerce app built with Vite, React.js, GraphQL, Redux, and Apollo Client. The app leverages the power of the Graphbase serverless GraphQL API for seamless product management.
 
