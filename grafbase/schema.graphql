@@ -15,6 +15,40 @@ type Products @model {
   products: [ProductDetails]!
 }
 
+type Items @model {
+  userid: ID!
+  qty: Int
+  id: ID!
+  price: Decimal
+  discountPercentage: Float
+  thumbnail: String
+  title: String
+}
+
+type Address @model {
+  name: String
+  email: String
+  phone: String
+  street: String
+  city: String
+  state: String
+  postalcode: String
+}
+
+type Order @model {
+  ordereditems: [Items]
+}
+
+type User @model {
+  id: ID!
+  name: String
+  email: String! @unique
+  password: String
+  cart: [Items]
+  addresses: [Address]
+  orders: [Order]
+}
+
 # get all productdetails
 
 # query ProductDetailsCollection {
@@ -81,6 +115,19 @@ type Products @model {
 #   }) {
 #     productDetails {
 #       title
+#     }
+#   }
+# }
+
+# craete user
+# mutation UserCreate {
+#   userCreate(input: {
+#     name: "John Doe",
+#     email: "john@email.com",
+#     password: "1234"
+#   }) {
+#     user {
+#       name
 #     }
 #   }
 # }
