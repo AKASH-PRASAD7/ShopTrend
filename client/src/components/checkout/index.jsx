@@ -3,52 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import { removeItemFromCart, changeItemQyty } from "../../redux/auth/action";
-const products = [
-  {
-    id: 1,
-    name: "Throwback Hip Bag",
-    href: "#",
-    color: "Salmon",
-    price: "$90.00",
-    quantity: 1,
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg",
-    imageAlt:
-      "Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt.",
-  },
-  {
-    id: 2,
-    name: "Medium Stuff Satchel",
-    href: "#",
-    color: "Blue",
-    price: "$32.00",
-    quantity: 1,
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg",
-    imageAlt:
-      "Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.",
-  },
-  // More products...
-];
 
-const addresses = [
-  {
-    name: "John wick",
-    street: "11th Main",
-    city: "Delhi",
-    pinCode: 110001,
-    state: "Delhi",
-    phone: 12312321331,
-  },
-  {
-    name: "John Doe",
-    street: "15th Main",
-    city: "New York",
-    pinCode: 100000,
-    state: "Usa",
-    phone: 123123123,
-  },
-];
 const index = () => {
   const navigate = useNavigate();
   const { cart } = useSelector((state) => state.user);
@@ -56,14 +11,13 @@ const index = () => {
   const dispatch = useDispatch();
   const handleRemove = (e, ID) => {
     e.preventDefault();
-    console.log(ID);
+
     dispatch(removeItemFromCart(ID));
   };
 
   const handleQuantity = (e, ID) => {
     e.preventDefault();
-    console.log(e.target.value);
-    console.log(ID);
+
     dispatch(changeItemQyty(ID, e.target.value));
   };
   if (items.length === 0) {
@@ -71,7 +25,7 @@ const index = () => {
   }
   return (
     <>
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto mb-4 max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-5">
           <div className="lg:col-span-3">
             <form className="bg-white px-5 py-12 mt-12">
@@ -94,6 +48,7 @@ const index = () => {
                       </label>
                       <div className="mt-2">
                         <input
+                          required
                           type="text"
                           name="first-name"
                           id="first-name"
@@ -112,6 +67,7 @@ const index = () => {
                       </label>
                       <div className="mt-2">
                         <input
+                          required
                           type="text"
                           name="last-name"
                           id="last-name"
@@ -130,6 +86,7 @@ const index = () => {
                       </label>
                       <div className="mt-2">
                         <input
+                          required
                           id="email"
                           name="email"
                           type="email"
@@ -169,6 +126,7 @@ const index = () => {
                       </label>
                       <div className="mt-2">
                         <input
+                          required
                           type="text"
                           name="street-address"
                           id="street-address"
@@ -187,6 +145,7 @@ const index = () => {
                       </label>
                       <div className="mt-2">
                         <input
+                          required
                           type="text"
                           name="city"
                           id="city"
@@ -205,6 +164,7 @@ const index = () => {
                       </label>
                       <div className="mt-2">
                         <input
+                          required
                           type="text"
                           name="region"
                           id="region"
@@ -223,6 +183,7 @@ const index = () => {
                       </label>
                       <div className="mt-2">
                         <input
+                          required
                           type="text"
                           name="postal-code"
                           id="postal-code"
@@ -231,106 +192,6 @@ const index = () => {
                         />
                       </div>
                     </div>
-                  </div>
-                </div>
-
-                <div className="mt-6 flex items-center justify-end gap-x-6">
-                  <button
-                    type="button"
-                    className="text-sm font-semibold leading-6 text-gray-900"
-                  >
-                    Reset
-                  </button>
-                  <button
-                    type="submit"
-                    className="rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-                  >
-                    Add Address
-                  </button>
-                </div>
-
-                <div className="border-b border-gray-900/10 pb-12">
-                  <h2 className="text-base font-semibold leading-7 text-gray-900">
-                    Addresses
-                  </h2>
-                  <p className="mt-1 text-sm leading-6 text-gray-600">
-                    Choose from Existing addresses
-                  </p>
-                  <ul role="list">
-                    {addresses.map((address, index) => (
-                      <li
-                        key={index}
-                        className="flex justify-between gap-x-6 px-5 py-5 border-solid border-2 border-gray-200"
-                      >
-                        <div className="flex gap-x-4">
-                          <input
-                            name="address"
-                            type="radio"
-                            className="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-600"
-                          />
-                          <div className="min-w-0 flex-auto">
-                            <p className="text-sm font-semibold leading-6 text-gray-900">
-                              {address.name}
-                            </p>
-                            <p className="mt-1 truncate text-xs leading-5 text-gray-500">
-                              {address.street}
-                            </p>
-                            <p className="mt-1 truncate text-xs leading-5 text-gray-500">
-                              {address.pinCode}
-                            </p>
-                          </div>
-                        </div>
-                        <div className="hidden sm:flex sm:flex-col sm:items-end">
-                          <p className="text-sm leading-6 text-gray-900">
-                            Phone: {address.phone}
-                          </p>
-                          <p className="text-sm leading-6 text-gray-500">
-                            {address.city}
-                          </p>
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div className="mt-10 space-y-10">
-                    <fieldset>
-                      <legend className="text-sm font-semibold leading-6 text-gray-900">
-                        Payment Methods
-                      </legend>
-                      <p className="mt-1 text-sm leading-6 text-gray-600">
-                        Choose One
-                      </p>
-                      <div className="mt-6 space-y-6">
-                        <div className="flex items-center gap-x-3">
-                          <input
-                            id="cash"
-                            name="payments"
-                            type="radio"
-                            className="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-600"
-                          />
-                          <label
-                            htmlFor="cash"
-                            className="block text-sm font-medium leading-6 text-gray-900"
-                          >
-                            Cash
-                          </label>
-                        </div>
-                        <div className="flex items-center gap-x-3">
-                          <input
-                            id="card"
-                            name="payments"
-                            type="radio"
-                            className="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-600"
-                          />
-                          <label
-                            htmlFor="card"
-                            className="block text-sm font-medium leading-6 text-gray-900"
-                          >
-                            Card Payment
-                          </label>
-                        </div>
-                      </div>
-                    </fieldset>
                   </div>
                 </div>
               </div>
