@@ -8,7 +8,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 const Checkout = () => {
   const navigate = useNavigate();
   const { email } = useSelector((state) => state.user);
-  console.log(email);
+
   useEffect(() => {
     if (!email) {
       navigate("/signin");

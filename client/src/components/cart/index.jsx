@@ -13,14 +13,13 @@ const index = () => {
 
   const handleRemove = (e, ID) => {
     e.preventDefault();
-    console.log(ID);
+
     dispatch(removeItemFromCart(ID));
   };
 
   const handleQuantity = (e, ID) => {
     e.preventDefault();
-    console.log(e.target.value);
-    console.log(ID);
+
     dispatch(changeItemQyty(ID, e.target.value));
   };
 

@@ -53,7 +53,7 @@ const Prouctinfo = () => {
 
   const handleBuy = (e) => {
     e.preventDefault();
-    console.log(productDetails);
+
     const cart1 = {
       ...productDetails,
       qty: 1,
